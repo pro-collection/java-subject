@@ -14,6 +14,12 @@
     <artifactId>mybatis-spring-boot-starter</artifactId>
     <version>1.3.2</version>
 </dependency>
+
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <scope>test</scope>
+</dependency>
 ```
 
 2、添加mapper扫描路径                  
