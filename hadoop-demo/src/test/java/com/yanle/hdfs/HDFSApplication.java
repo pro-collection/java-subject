@@ -1,6 +1,7 @@
 package com.yanle.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.junit.After;
@@ -18,14 +19,14 @@ public class HDFSApplication {
 
     @Test
     public void makeDir() throws Exception {
-        fileSystem.mkdirs(new Path("/test"));
+
     }
 
     @Before
     public void setUp() throws Exception {
         System.out.println("settUp");
         configuration = new Configuration();
-        fileSystem = FileSystem.get(new URI(HDFS_PATH), configuration);
+        fileSystem = FileSystem.get(new URI(HDFS_PATH), configuration, "vagrant");
     }
 
     @After
