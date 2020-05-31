@@ -82,6 +82,19 @@ public class HDFSApplication {
         System.out.println("采用流拷贝的方式上传文件成功");
     }
 
+    /**
+     * 采用FileSystem类自带的copyToLocalFile接口下载文件
+     */
+    @Test
+    public void downloadFileFunctionOne() throws Exception {
+        // 远端file地址
+        Path path = new Path("/dir/mall.sql");
+        // 本地地址
+        Path dist = new Path("/Users/yons/Downloads/mall-download-file-function1.sql");
+        fileSystem.copyToLocalFile(path, dist);
+        System.out.println("采用FileSystem类自带的copyToLocalFile接口下载文件 - 成功");
+    }
+
     @Before
     public void setUp() throws Exception {
         System.out.println("settUp");
