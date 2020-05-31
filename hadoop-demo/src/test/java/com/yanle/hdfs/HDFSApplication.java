@@ -11,6 +11,7 @@ import org.junit.Test;
 import sun.nio.ch.IOUtil;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
@@ -93,6 +94,24 @@ public class HDFSApplication {
         Path dist = new Path("/Users/yons/Downloads/mall-download-file-function1.sql");
         fileSystem.copyToLocalFile(path, dist);
         System.out.println("采用FileSystem类自带的copyToLocalFile接口下载文件 - 成功");
+    }
+
+    /**
+     * 采用流拷贝的方式下载文件
+     */
+    @Test
+    public void downloadFileFunctionTow() throws Exception {
+        // 远端file地址
+        Path path = new Path("/dir/mall.sql");
+        // 输入流
+        InputStream is = fileSystem.open(path);
+        // 输出流
+        OutputStream os = new FileOutputStream("/Users/yons/Downloads/mall-download-file-function2.sql");
+        IOUtils.copyBytes(is, os, 1024);
+        is.close();
+        os.close();
+
+        System.out.println("采用流拷贝的方式下载文件-成功");
     }
 
     @Before
