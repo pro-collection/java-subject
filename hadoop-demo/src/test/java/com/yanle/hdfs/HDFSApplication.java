@@ -4,10 +4,15 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.nio.ch.IOUtil;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 
 
@@ -49,9 +54,32 @@ public class HDFSApplication {
     public void uploadFileFunctionOne() throws Exception {
         // 本地路径
         Path dist = new Path("/Users/yons/Downloads/mall.sql");
+        // 远端服务器路径
         Path path = new Path("/dir/mall.sql");
         fileSystem.copyFromLocalFile(dist, path);
         System.out.println("本地文件上传hadoop成功");
+    }
+
+    /**
+     * 采用流拷贝的方式上传文件
+     * 上传本地文件到 hadoop
+     */
+    @Test
+    public void uploadFileFunctionTow() throws Exception {
+        // 远端服务器路径
+        Path path = new Path("/dir/mall2.sql");
+        // 创建输入口
+        InputStream is  = new FileInputStream("/Users/yons/Downloads/mall.sql");
+        // 输出流
+        OutputStream os = fileSystem.create(path);
+        // 使用工具类实现复制
+        IOUtils.copyBytes(is, os, 1024);
+
+        // 关闭流
+        is.close();
+        os.close();
+
+        System.out.println("采用流拷贝的方式上传文件成功");
     }
 
     @Before
