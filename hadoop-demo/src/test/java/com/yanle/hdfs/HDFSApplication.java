@@ -17,9 +17,17 @@ public class HDFSApplication {
     FileSystem fileSystem = null;
     Configuration configuration = null;
 
+    /**
+     * 创建文件
+     */
     @Test
-    public void makeDir() throws Exception {
-
+    public void makeFile() throws Exception {
+        // 创建文件路径
+        Path dfs = new Path("/dir/test2.text");
+        // 写入文件
+        FSDataOutputStream os = fileSystem.create(dfs, true);
+        os.writeBytes("hello world - by HuDie");
+        os.close();
     }
 
     @Before
