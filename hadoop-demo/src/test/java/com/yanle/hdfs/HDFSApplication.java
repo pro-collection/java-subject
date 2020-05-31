@@ -30,6 +30,17 @@ public class HDFSApplication {
         os.close();
     }
 
+    /**
+     * 删除文件
+     */
+    @Test
+    public void deleteFile() throws Exception {
+        // 删除文件路径
+        Path path = new Path("/dir/test2.text");
+        fileSystem.delete(path, true);
+        System.out.println("删除文件 " + path + " 成功");
+    }
+
     @Before
     public void setUp() throws Exception {
         System.out.println("settUp");
