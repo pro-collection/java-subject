@@ -41,6 +41,19 @@ public class HDFSApplication {
         System.out.println("删除文件 " + path + " 成功");
     }
 
+    /**
+     * 采用FileSystem类自带的copyFromLocalFile接口上传文件
+     * 上传本地文件到 hadoop
+     */
+    @Test
+    public void uploadFileFunctionOne() throws Exception {
+        // 本地路径
+        Path dist = new Path("/Users/yons/Downloads/mall.sql");
+        Path path = new Path("/dir/mall.sql");
+        fileSystem.copyFromLocalFile(dist, path);
+        System.out.println("本地文件上传hadoop成功");
+    }
+
     @Before
     public void setUp() throws Exception {
         System.out.println("settUp");
