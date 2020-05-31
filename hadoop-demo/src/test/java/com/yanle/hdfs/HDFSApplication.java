@@ -2,6 +2,7 @@ package com.yanle.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
@@ -15,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class HDFSApplication {
@@ -70,7 +73,7 @@ public class HDFSApplication {
         // 远端服务器路径
         Path path = new Path("/dir/mall2.sql");
         // 创建输入口
-        InputStream is  = new FileInputStream("/Users/yons/Downloads/mall.sql");
+        InputStream is = new FileInputStream("/Users/yons/Downloads/mall.sql");
         // 输出流
         OutputStream os = fileSystem.create(path);
         // 使用工具类实现复制
@@ -112,6 +115,39 @@ public class HDFSApplication {
         os.close();
 
         System.out.println("采用流拷贝的方式下载文件-成功");
+    }
+
+    /**
+     * 查看文件属性
+     * 通过类FileStatus可查看指定文件在HDFS集群上的具体信息
+     */
+    @Test
+    public void getFileStat() throws Exception {
+        // 远端file地址
+        Path path = new Path("/dir/mall.sql");
+        // 获取文件状态
+        FileStatus fileStatus = fileSystem.getFileLinkStatus(path);
+
+        // 获取数据块大小
+        long blockSize = fileStatus.getBlockSize();
+        System.out.println("获取数据块大小: " + blockSize);
+
+        // 获取文件大小
+        long fileSize = fileStatus.getLen();
+        System.out.println("获取文件大小: " + fileSize);
+
+        // 获取文件拥有者信息
+        String fileOwner = fileStatus.getOwner();
+        System.out.println("获取文件拥有者信息: " + fileOwner);
+
+        // 最近访问时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        long accessTime = fileStatus.getAccessTime();
+        System.out.println("最近访问时间: " + sdf.format(new Date(accessTime)));
+
+        // 获取最后修改时间
+        long modifyTime = fileStatus.getModificationTime();
+        System.out.println("获取最后修改时间: " + sdf.format(new Date(modifyTime)));
     }
 
     @Before
