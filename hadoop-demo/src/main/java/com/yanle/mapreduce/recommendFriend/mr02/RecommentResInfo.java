@@ -63,4 +63,4 @@ public class RecommentResInfo implements WritableComparable<RecommentResInfo> {
     public void setCommonNum(int commonNum) {
         this.commonNum = commonNum;
     }
-}}
+}
