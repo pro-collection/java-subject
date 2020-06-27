@@ -1,0 +1,22 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://66.66.66.66:3306/mybatis_plus_demo?characterEncoding=utf-8&useSSL=false
+  jackson:
+    default-property-inclusion: non_null
+  thymeleaf:
+    mode: HTML5
+    cache: false
+  devtools:
+    restart:
+      enabled: true
+
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.store.system.mapper: debug
