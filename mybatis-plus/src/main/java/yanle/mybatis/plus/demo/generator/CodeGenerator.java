@@ -1,6 +1,7 @@
 package yanle.mybatis.plus.demo.generator;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.mysql.cj.util.StringUtils;
 
 import java.util.Scanner;
@@ -17,5 +18,11 @@ public class CodeGenerator {
             if (StringUtils.isNullOrEmpty(ipt)) return ipt;
         }
         throw new MybatisPlusException("请输入正确的" + tip + "!");
+    }
+
+    public static void main(String[] args) {
+        // 代码生成器
+        AutoGenerator mpg = new AutoGenerator();
+
     }
 }
