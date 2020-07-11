@@ -20,7 +20,9 @@ public class MenuController {
     }
 
     @GetMapping("/update")
-    public String update(String id, Model model) {
+    public String update() {
+        // todo 通过 id 获取 sysMenu 信息
         return "module/menu/updateMenu";
     }
+
 }
