@@ -5,12 +5,10 @@ import com.wf.captcha.ArithmeticCaptcha;
 import com.yanle.mybatis.plus.demo1.system.vo.ImgResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
-public class IndexController {
+public class IndexRestfulController {
     /**
      * 验证码 宽度
      */

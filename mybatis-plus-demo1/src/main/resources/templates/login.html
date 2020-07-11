@@ -105,7 +105,7 @@
         methods: {
             getCode: function () {
                 $.ajax({
-                    url: 'code',
+                    url: '/code',
                     type: 'GET',
                     success: function (res) {
                         vm.codeUrl = res.img;
