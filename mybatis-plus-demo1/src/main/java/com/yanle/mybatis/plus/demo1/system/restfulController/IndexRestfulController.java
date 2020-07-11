@@ -30,7 +30,6 @@ public class IndexRestfulController {
     @GetMapping("/code")
     public ImgResult getCode() {
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(width, height, digit);
-        String result = captcha.text();
         String uuid = IdUtil.simpleUUID();
         return new ImgResult(captcha.toBase64(), uuid);
     }
