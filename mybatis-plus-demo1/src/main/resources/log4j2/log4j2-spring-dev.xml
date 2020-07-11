@@ -8,7 +8,7 @@
         <!-- 定义日志存储的路径 -->
         <property name="DAY_FILE_PATH" value="daylogs"/>
         <property name="FILE_PATH" value="applogs"/>
-        <property name="FILE_NAME" value="thyme"/>
+        <property name="FILE_NAME" value="mybatis-plus-demo1"/>
     </Properties>
     <appenders>
         <console name="CONSOLE" target="SYSTEM_OUT">
