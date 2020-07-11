@@ -9,7 +9,7 @@
         }
     </style>
     <link rel="shortcut icon" th:href="@{favicon.ico}">
-    <link th:href="@{static/css/element-ui.2.13.0.css}" rel="stylesheet">
+    <link th:href="@{/static/css/element-ui.2.13.0.css}" rel="stylesheet">
     <style type="text/css">
         .login {
             display: flex;
@@ -88,10 +88,10 @@
     if (window != top)
         top.location.href = location.href;
 </script>
-<script th:src="@{static/js/sha256.js}"></script>
-<script th:src="@{static/js/jquery.1.12.4.min.js}"></script>
-<script th:src="@{static/js/vue.2.6.11.js}"></script>
-<script th:src="@{static/js/element-ui.2.13.0.js}"></script>
+<script th:src="@{/static/js/sha256.js}"></script>
+<script th:src="@{/static/js/jquery.1.12.4.min.js}"></script>
+<script th:src="@{/static/js/vue.2.6.11.js}"></script>
+<script th:src="@{/static/js/element-ui.2.13.0.js}"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
@@ -162,6 +162,6 @@
         CanvasParticle(config);
     }
 </script>
-<script th:src="@{static/js/canvas-particle.js}"></script>
+<script th:src="@{/static/js/canvas-particle.js}"></script>
 </body>
 </html>
