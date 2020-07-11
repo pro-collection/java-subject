@@ -1,7 +1,7 @@
 package com.yanle.mybatis.plus.demo1;
 
 import cn.hutool.crypto.digest.DigestUtil;
-import com.thyme.common.utils.UUIDUtils;
+import com.yanle.mybatis.plus.demo1.common.utils.UUIDUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
