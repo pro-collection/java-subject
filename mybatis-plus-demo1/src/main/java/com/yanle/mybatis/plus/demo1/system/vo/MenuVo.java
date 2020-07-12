@@ -1,5 +1,6 @@
 package com.yanle.mybatis.plus.demo1.system.vo;
 
+import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import lombok.Builder;
 import lombok.Data;
 
