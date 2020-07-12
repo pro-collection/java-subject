@@ -2,6 +2,7 @@ package com.yanle.mybatis.plus.demo1.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yanle.mybatis.plus.demo1.system.vo.MenuNameVO;
 import com.yanle.mybatis.plus.demo1.system.vo.MenuVo;
 import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.vo.SysMenuVO;
