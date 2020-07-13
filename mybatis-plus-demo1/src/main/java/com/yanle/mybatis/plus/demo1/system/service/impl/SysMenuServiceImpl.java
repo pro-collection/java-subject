@@ -80,56 +80,56 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public int updateMenu(SysMenuVO sysMenu) {
-        return 0;
+        return sysMenuDao.updateMenu(sysMenu);
     }
 
     @Override
     public int addMenu(SysMenuVO sysMenu) {
-        return 0;
+        return sysMenuDao.addMenu(sysMenu);
     }
 
     @Override
     public SysMenu getByName(String menuName, String menuCode, String menuHref) {
-        return null;
+        return sysMenuDao.getByName(menuName, menuCode, menuHref);
     }
 
     @Override
     public SysMenu getById(String id) {
-        return null;
+        return sysMenuDao.getById(id);
     }
 
     @Override
     public List<SysMenu> getFirstMenu() {
-        return null;
+        return sysMenuDao.getFirstMenu();
     }
 
     @Override
     public List<SysMenu> getSecondMenu() {
-        return null;
+        return sysMenuDao.getSecondMenu();
     }
 
     @Override
     public List<String> getRoleMenu(String roleId) {
-        return null;
+        return sysMenuDao.getRoleMenu(roleId);
     }
 
     @Override
     public List<String> getMenuLevel() {
-        return null;
+        return sysMenuDao.getMenuLevel();
     }
 
     @Override
     public List<MenuNameVO> getPreviousMenu(String menuLevel) {
-        return null;
+        return sysMenuDao.getPreviousMenu(menuLevel);
     }
 
     @Override
-    public String getByMenuName(String menuNames) {
-        return null;
+    public String getByMenuName(String menuName) {
+        return sysMenuDao.getByMenuName(menuName);
     }
 
     @Override
     public int deleteMenuById(String id) {
-        return 0;
+        return sysMenuDao.deleteMenuById(id);
     }
 }
