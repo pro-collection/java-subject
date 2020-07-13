@@ -25,4 +25,21 @@ public interface SysUserDao extends BaseMapper<SysUser> {
      */
     @Select("select * from sys_user")
     IPage<SysUser> getAll(Page page);
+
+    /**
+     * 根据 Id 查询用户
+     * @param id id
+     * @return SySUser
+     */
+    @Select("select * from sys_user where id = #{id}")
+    SysUser getById(@Param("id") String id);
+
+    /**
+     * 更改用户密码
+     * @param password 密码
+     * @param id id
+     * @return 更改结果
+     */
+    @Select("update sys_user set password = #{password} where id = #{id}")
+    int updatePasswordById(@Param("password") String password, @Param("id") String id);
 }
