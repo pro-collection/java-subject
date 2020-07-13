@@ -46,7 +46,7 @@ public interface SysRoleDao extends BaseMapper<SysRole> {
 
     /**
      * 获取所有的角色名称
-     * @return所有角色名称
+     * @return 所有角色名称
      */
     @Select("select name from sys_role order by create_time")
     List<String> getAllRoleName();
