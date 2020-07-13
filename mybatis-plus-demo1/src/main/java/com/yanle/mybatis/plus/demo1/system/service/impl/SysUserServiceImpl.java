@@ -3,9 +3,13 @@ package com.yanle.mybatis.plus.demo1.system.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yanle.mybatis.plus.demo1.system.entity.SysUser;
 import com.yanle.mybatis.plus.demo1.system.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import sun.jvm.hotspot.debugger.Page;
 
+@Service
 public class SysUserServiceImpl implements SysUserService {
+
     @Override
     public SysUser findByName(String name) {
         return null;
