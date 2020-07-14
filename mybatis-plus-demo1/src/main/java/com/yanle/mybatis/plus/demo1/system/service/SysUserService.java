@@ -3,7 +3,7 @@ package com.yanle.mybatis.plus.demo1.system.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yanle.mybatis.plus.demo1.system.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
-import sun.jvm.hotspot.debugger.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 public interface SysUserService {
 
