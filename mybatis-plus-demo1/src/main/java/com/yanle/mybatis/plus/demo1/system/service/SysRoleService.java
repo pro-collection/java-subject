@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanle.mybatis.plus.demo1.system.entity.SysRole;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface SysRoleService {
     /**
      * 根据 ID 查询角色
@@ -41,5 +43,30 @@ public interface SysRoleService {
      */
     int deleteById(String id);
 
+    /**
+     * 根据id更新角色
+     * @param sysRole sysRole
+     * @return int
+     */
+    int updateById(SysRole sysRole);
 
+    /**
+     * 保存角色
+     * @param sysRole 角色
+     * @return 返回值
+     */
+    int insert(SysRole sysRole);
+
+    /**
+     * 获取所有的角色名称
+     * @return 所有角色名称
+     */
+    List<String> getAllRoleName();
+
+    /**
+     * 根据角色名称查询角色id
+     * @param name 角色名称
+     * @return 角色id
+     */
+    String getIdByName(String name);
 }
