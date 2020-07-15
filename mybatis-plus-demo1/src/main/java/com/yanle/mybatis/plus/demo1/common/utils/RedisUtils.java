@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class RedisUtils {
-
     @SuppressWarnings("rawtypes")
     @Autowired
     private RedisTemplate redisTemplate;
