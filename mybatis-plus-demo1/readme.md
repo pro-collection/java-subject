@@ -10,3 +10,4 @@
 - [开发时临时关闭配置好的SpingSecurity服务的解决办法](https://blog.csdn.net/qq_42257131/article/details/106418601)
 - [springboot2.0+，整合security配置security关闭http基本验证](https://blog.csdn.net/qq_42703181/article/details/86361078)
 - [详解Lombok中的@Builder用法](https://www.jianshu.com/p/d08e255312f9)
+- [Spring注解之 @SuppressWarnings注解](https://www.cnblogs.com/liaojie970/p/9009199.html)
