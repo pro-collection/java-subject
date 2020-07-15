@@ -54,5 +54,22 @@ public class RedisUtils {
         return result;
     }
 
+    /**
+     * 读取缓存
+     * @param key key
+     * @return return
+     */
+    public Object get(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
 
+    /**
+     * 判断是否存在对应key
+     * @param key key
+     * @return return
+     */
+    @SuppressWarnings("unchecked")
+    public boolean exists(String key) {
+        return redisTemplate.hasKey(key);
+    }
 }
