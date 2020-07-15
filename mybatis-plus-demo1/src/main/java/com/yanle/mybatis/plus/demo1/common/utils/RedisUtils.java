@@ -99,6 +99,26 @@ public class RedisUtils {
         return redisTemplate.keys(key);
     }
 
+    /**
+     * 根据key 获取过期时间
+     *
+     * @param key 键 不能为null
+     * @return 时间(秒) 返回0代表为永久有效
+     */
+    @SuppressWarnings("unchecked")
+    public long getExpire(String key) {
+        return redisTemplate.getExpire(key, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 批量删除对应的value
+     *
+     * @param keys 缓存key
+     */
+    public void remove(String... keys) {
+        for (String key : keys) remove(key);
+    }
+
     // ---------------- set -------------------
 
     /**
