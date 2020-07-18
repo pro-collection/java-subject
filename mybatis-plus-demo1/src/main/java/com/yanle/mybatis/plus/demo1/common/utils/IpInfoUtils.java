@@ -67,9 +67,9 @@ public class IpInfoUtils {
 
     /**
      * 获取 ip 地址
-     * @param ip
-     * @return
-     * @throws Exception
+     * @param ip ip
+     * @return ip 地址
+     * @throws Exception Exception
      */
     public static String getIpSource(String ip) throws Exception {
         DbConfig config = new DbConfig();
@@ -84,4 +84,6 @@ public class IpInfoUtils {
         }
         return address.equals(Constants.REGION) ? Constants.INTRANET_IP : address;
     }
+
+
 }
