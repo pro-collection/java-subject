@@ -1,7 +1,12 @@
 package com.yanle.mybatis.plus.demo1.common.utils;
 
+import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.db.Db;
+import com.sun.tools.classfile.ConstantPool;
 import com.yanle.mybatis.plus.demo1.common.base.Constants;
+import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
+import org.lionsoul.ip2region.DbSearcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -60,11 +65,23 @@ public class IpInfoUtils {
         return "未知";
     }
 
+    /**
+     * 获取 ip 地址
+     * @param ip
+     * @return
+     * @throws Exception
+     */
     public static String getIpSource(String ip) throws Exception {
         DbConfig config = new DbConfig();
         String path = "config/ip2region.db";
         String name = "ip2region.db";
-        // todo FileUtils
-//        File file =
+        File file = FileUtils.inputStreamToFile(new ClassPathResource(path).getStream(), name);
+        DbSearcher searcher = new DbSearcher(config, file.getParent());
+        DataBlock dataBlock = searcher.btreeSearch(ip);
+        String address = dataBlock.getRegion().replace("0|","");
+        if (address.charAt(address.length() - 1) == '|') {
+            address = address.substring(0, address.length() -1);
+        }
+        return address.equals(Constants.REGION) ? Constants.INTRANET_IP : address;
     }
 }
