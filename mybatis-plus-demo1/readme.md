@@ -14,3 +14,5 @@
 - [Spring security中的BCryptPasswordEncoder方法对密码进行加密与密码匹配](https://www.jianshu.com/p/89c4c476e189)
 - [RedisTemplate用法详解](https://blog.csdn.net/javaxiaibai0414/article/details/88666453)
 - [springboot之使用redistemplate优雅地操作redis](https://www.cnblogs.com/superfj/p/9232482.html)
+- [System.getProperty()-获取系统参数](https://blog.csdn.net/qq_37595946/article/details/93891072)
+- [Java中的File.separator用法](https://www.cnblogs.com/xlizi/p/9303217.html)
