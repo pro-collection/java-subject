@@ -22,7 +22,7 @@ public class IpInfoUtils {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
             ip = request.getHeader("WL-Proxy-Client-IP");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip  = request.getRemoteAddr();
+            ip = request.getRemoteAddr();
             if (Constants.LOCAL_HOST.equals(ip)) {
                 InetAddress inet = null;
                 try {
@@ -33,8 +33,8 @@ public class IpInfoUtils {
                 ip = inet.getHostAddress();
             }
         }
-        if (ip != null && ip.length()>15) {
-            if (ip.indexOf(",")>0) {
+        if (ip != null && ip.length() > 15) {
+            if (ip.indexOf(",") > 0) {
                 ip = ip.substring(0, ip.indexOf(","));
             }
         }
@@ -42,5 +42,19 @@ public class IpInfoUtils {
             ip = Constants.LOCAL_HOST;
         }
         return ip;
+    }
+
+    /**
+     * 获取客户端主机名称
+     *
+     * @return hostName
+     */
+    public static String getHostName() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+
+        }
+        return "未知";
     }
 }
