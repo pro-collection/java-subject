@@ -1,9 +1,9 @@
 package com.yanle.mybatis.plus.demo1.common.utils;
 
 import cn.hutool.core.io.resource.ClassPathResource;
-import cn.hutool.db.Db;
-import com.sun.tools.classfile.ConstantPool;
 import com.yanle.mybatis.plus.demo1.common.base.Constants;
+import nl.bitwalker.useragentutils.Browser;
+import nl.bitwalker.useragentutils.UserAgent;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
@@ -67,6 +67,7 @@ public class IpInfoUtils {
 
     /**
      * 获取 ip 地址
+     *
      * @param ip ip
      * @return ip 地址
      * @throws Exception Exception
@@ -78,12 +79,33 @@ public class IpInfoUtils {
         File file = FileUtils.inputStreamToFile(new ClassPathResource(path).getStream(), name);
         DbSearcher searcher = new DbSearcher(config, file.getParent());
         DataBlock dataBlock = searcher.btreeSearch(ip);
-        String address = dataBlock.getRegion().replace("0|","");
+        String address = dataBlock.getRegion().replace("0|", "");
         if (address.charAt(address.length() - 1) == '|') {
-            address = address.substring(0, address.length() -1);
+            address = address.substring(0, address.length() - 1);
         }
         return address.equals(Constants.REGION) ? Constants.INTRANET_IP : address;
     }
 
+    /**
+     * 获取游览器名称
+     *
+     * @param request request
+     * @return return
+     */
+    public static String getBrowser(HttpServletRequest request) {
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        Browser browser = userAgent.getBrowser();
+        return browser.getName();
+    }
 
+    /**
+     * 获取操作系统名称
+     *
+     * @param request request
+     * @return return
+     */
+    public static String getSystemName(HttpServletRequest request) {
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        return userAgent.getOperatingSystem().getName();
+    }
 }
