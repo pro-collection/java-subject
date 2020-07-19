@@ -18,3 +18,5 @@
 - [Java中的File.separator用法](https://www.cnblogs.com/xlizi/p/9303217.html)
 - [Java 根据 IP 地址来获取 位置 -- 使用 ip2region](https://blog.csdn.net/weixin_42144379/article/details/84900446)
 - [一文看懂HttpServletResponse](https://www.jianshu.com/p/8bc6b82403c5)
+- [PrintWriter类详解](https://blog.csdn.net/dream_ryoma/article/details/80873718)
+- [PrintStream和PrintWriter](https://www.liaoxuefeng.com/wiki/1252599548343744/1302299230076961)
