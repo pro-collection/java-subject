@@ -21,3 +21,5 @@
 - [PrintWriter类详解](https://blog.csdn.net/dream_ryoma/article/details/80873718)
 - [PrintStream和PrintWriter](https://www.liaoxuefeng.com/wiki/1252599548343744/1302299230076961)
 - [Ant路径匹配规则AntPathMatcher的注意事项](https://blog.csdn.net/songzehao/article/details/80686663)
+- [java集合Collection常用方法详解](https://blog.csdn.net/javaee_gao/article/details/96372530)
+- [Java Pattern类的用法详解(正则表达式)](https://blog.csdn.net/demon7552003/article/details/94884761)
