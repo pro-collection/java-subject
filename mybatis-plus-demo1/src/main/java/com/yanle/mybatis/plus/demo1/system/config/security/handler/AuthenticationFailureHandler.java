@@ -33,6 +33,7 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
             // todo 总感觉有问题
             if (exception instanceof SessionAuthenticationException) {
                 message = Constants.LOGIN_MAX_LIMIT;
+                // 目的就是写入response
                 ResponseUtils.print(response, JSON.toJSONString(ApiResponse.fail(message)));
             }
             message = exception.getMessage();

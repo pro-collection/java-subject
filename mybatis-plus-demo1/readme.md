@@ -17,3 +17,4 @@
 - [System.getProperty()-获取系统参数](https://blog.csdn.net/qq_37595946/article/details/93891072)
 - [Java中的File.separator用法](https://www.cnblogs.com/xlizi/p/9303217.html)
 - [Java 根据 IP 地址来获取 位置 -- 使用 ip2region](https://blog.csdn.net/weixin_42144379/article/details/84900446)
+- [一文看懂HttpServletResponse](https://www.jianshu.com/p/8bc6b82403c5)
