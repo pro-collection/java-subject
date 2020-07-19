@@ -47,6 +47,6 @@ public class SysLogServiceImpl implements SysLogService {
 
     @Override
     public IPage<SysLog> findSysLogPage(Page page) {
-        return null;
+        return sysLogDao.findSysLogPage(page);
     }
 }
