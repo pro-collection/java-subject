@@ -21,6 +21,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ValidateCodeFilter extends OncePerRequestFilter {
+
     private final RedisService redisService;
 
     private final AuthenticationFailureHandler authenticationFailureHandler;
@@ -42,14 +43,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
         doFilter(request,response,filterChain);
     }
 
-    private void codeValidate(HttpServletRequest request) throws ValidateCodeException {
+    private void codeValidate(HttpServletRequest request) {
+        //获取传入的验证码
         String code = request.getParameter("code");
         String uuidCode = request.getParameter("uuidCode");
-        if (org.apache.commons.lang3.StringUtils.isEmpty(code)){
+        if (StringUtils.isEmpty(code)){
             throw new ValidateCodeException("验证码的值不能为空");
         }
         String codeVal = redisService.getCodeVal(uuidCode);
-        if (org.apache.commons.lang3.StringUtils.isEmpty(codeVal)) {
+        if (StringUtils.isEmpty(codeVal)) {
             throw new ValidateCodeException("验证码已过期");
         }
         if (!StringUtils.equals(codeVal,code)) {
