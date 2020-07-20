@@ -41,9 +41,7 @@ public class XssFilter implements Filter {
         for (String pattern : excludes) {
             Pattern p = Pattern.compile("^" + pattern);
             Matcher m = p.matcher(url);
-            if (m.find()) {
-                return true;
-            }
+            if (m.find()) return true;
         }
         return false;
     }
