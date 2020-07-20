@@ -23,3 +23,5 @@
 - [Ant路径匹配规则AntPathMatcher的注意事项](https://blog.csdn.net/songzehao/article/details/80686663)
 - [java集合Collection常用方法详解](https://blog.csdn.net/javaee_gao/article/details/96372530)
 - [Java Pattern类的用法详解(正则表达式)](https://blog.csdn.net/demon7552003/article/details/94884761)
+- [Java Jsoup详解](https://blog.csdn.net/Wjhsmart/article/details/89360904)
+- [java爬虫-jsoup教程](https://www.jianshu.com/p/1d7167bf9677)
