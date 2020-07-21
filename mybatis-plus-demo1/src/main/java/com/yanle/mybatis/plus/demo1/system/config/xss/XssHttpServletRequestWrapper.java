@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.Arrays;
 
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
@@ -31,5 +32,12 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         String value = super。getParameter(name);
         if (StringUtils.isNotBlank(value)) value = XssFilterUtil.clean(value);
         return value;
+    }
+
+    @Override
+    public String[] getParameterValues(String name) {
+        String[] arr = super.getParameterValues(name);
+        if (arr != null) Arrays.stream(arr).forEach(XssFilterUtil::clean);
+        return arr;
     }
 }
