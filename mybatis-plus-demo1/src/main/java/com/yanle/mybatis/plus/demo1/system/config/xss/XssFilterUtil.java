@@ -1,5 +1,7 @@
 package com.yanle.mybatis.plus.demo1.system.config.xss;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 
 public class XssFilterUtil {
@@ -11,4 +13,17 @@ public class XssFilterUtil {
      */
 
     private static final Whitelist WHITELIST = Whitelist.basicWithImages();
+
+    private static final Document.OutputSettings OUTPUT_SETTINGS = new Document.OutputSettings().prettyPrint(false);
+
+    static {
+        // 富文本编辑时一些样式是使用style来进行实现的
+        // 比如红色字体 style="color:red;"
+        // 所以需要给所有标签添加style属性
+        WHITELIST.addAttributes(":all", "style");
+    }
+
+    public static String clean(String content) {
+        return Jsoup.clean(content, "", WHITELIST, OUTPUT_SETTINGS);
+    }
 }
