@@ -25,3 +25,4 @@
 - [Java Pattern类的用法详解(正则表达式)](https://blog.csdn.net/demon7552003/article/details/94884761)
 - [Java Jsoup详解](https://blog.csdn.net/Wjhsmart/article/details/89360904)
 - [java爬虫-jsoup教程](https://www.jianshu.com/p/1d7167bf9677)
+- [JAVA中STATIC{}语句块详解](https://www.cnblogs.com/caolaoshi/p/7824748.html)
