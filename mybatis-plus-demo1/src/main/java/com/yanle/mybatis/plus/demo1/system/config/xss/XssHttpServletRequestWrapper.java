@@ -30,7 +30,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         boolean condition = ("content".equals(name) || name.endsWith("WithHtml")) && !isIncludeRichText;
         if (condition) return super.getParameter(name);
         name = XssFilterUtil.clean(name);
-        String value = super。getParameter(name);
+        String value = super.getParameter(name);
         if (StringUtils.isNotBlank(value)) value = XssFilterUtil.clean(value);
         return value;
     }
