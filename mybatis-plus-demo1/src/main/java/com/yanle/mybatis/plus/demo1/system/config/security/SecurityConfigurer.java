@@ -89,7 +89,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .logoutUrl(Constants.LOGOUT_URL)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler()
-
+                .logoutSuccessHandler(customLogoutSuccessHandler)
+                .and()
+                // session
+                .sessionManagement()
+                // 失效处理
+                //.invalidSessionUrl("/invalid_session")
+                //失效处理
+                .invalidSessionStrategy(customInvalidSessionStrategy)
+                //同一账号同时允许多个设备在线
+                .maximumSessions(maxSession)
+                //新用户挤走前用户
+                .maxSessionsPreventsLogin(preventsLogin)
+                //.expiredUrl("/expired")
+                //超时处理
+                .expiredSessionStrategy(customExpiredSessionStrategy)
+                .sessionRegistry(sessionRegistry);
     }
 }
