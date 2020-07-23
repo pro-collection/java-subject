@@ -1,5 +1,6 @@
 package com.yanle.mybatis.plus.demo1.system.config.filter;
 
+import com.yanle.mybatis.plus.demo1.system.config.xss.XssHttpServletRequestWrapper;
 import javafx.scene.Parent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
@@ -56,9 +57,8 @@ public class XssFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
-        // todo
-//        XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper((HttpServletRequest) request, IS_INCLUDE_RICH_TEXT);
-//        filterChain.doFilter(xssRequest, response);
+        XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper((HttpServletRequest) request, IS_INCLUDE_RICH_TEXT);
+        filterChain.doFilter(xssRequest, response);
     }
 
 }
