@@ -1,6 +1,8 @@
 ## mybatis-plus-demo1
 
 ### 有哪些技能点
+- xssfilter
+- srcurity
 
 
 
