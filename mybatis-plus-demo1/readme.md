@@ -3,6 +3,9 @@
 ### 有哪些技能点
 - xssfilter
 - srcurity
+- redisConfig
+- cache
+- @EnableCaching/@ConditionalOnClass/@EnableConfigurationProperties
 
 
 
