@@ -18,8 +18,7 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
-    @Value("${server.servlet.context-path}")
-    private String path;
+    private String path = null;
 
     @Autowired
     private SysLogService sysLogService;

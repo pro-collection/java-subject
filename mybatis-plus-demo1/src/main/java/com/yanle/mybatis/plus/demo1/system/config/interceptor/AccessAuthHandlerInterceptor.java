@@ -5,6 +5,7 @@ import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,9 +18,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 public class AccessAuthHandlerInterceptor implements HandlerInterceptor {
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
+    private String contextPath = null;
 
+    @Autowired
     private SysMenuService sysMenuService;
 
     @Override

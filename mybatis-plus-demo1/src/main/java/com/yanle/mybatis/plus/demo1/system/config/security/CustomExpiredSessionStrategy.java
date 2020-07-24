@@ -12,9 +12,6 @@ import java.io.IOException;
 
 @Component
 public class CustomExpiredSessionStrategy implements SessionInformationExpiredStrategy {
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
-
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent sessionInformationExpiredEvent) throws IOException, ServletException {
         HttpServletResponse response = sessionInformationExpiredEvent.getResponse();

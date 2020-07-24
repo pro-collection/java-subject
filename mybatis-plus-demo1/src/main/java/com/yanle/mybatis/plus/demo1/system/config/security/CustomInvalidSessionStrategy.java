@@ -11,10 +11,6 @@ import java.io.IOException;
 
 @Component
 public class CustomInvalidSessionStrategy implements InvalidSessionStrategy {
-
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
-
     @Override
     public void onInvalidSessionDetected(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException, ServletException {
         httpServletRequest.getRequestDispatcher("/invalid_session").forward(httpServletRequest, httpServletResponse);

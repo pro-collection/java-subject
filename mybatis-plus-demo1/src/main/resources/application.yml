@@ -2,7 +2,7 @@ server:
   servlet:
     session:
       timeout: 1800
-#  connection-timeout: 10000
+  #  connection-timeout: 10000
   port: 8080
 spring:
   profiles:
