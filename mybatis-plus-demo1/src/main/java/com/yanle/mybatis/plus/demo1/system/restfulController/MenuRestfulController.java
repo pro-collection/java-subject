@@ -9,13 +9,12 @@ import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.vo.MenuListVo;
 import com.yanle.mybatis.plus.demo1.system.vo.MenuVo;
+import com.yanle.mybatis.plus.demo1.system.vo.SysMenuNameVO;
+import com.yanle.mybatis.plus.demo1.system.vo.SysMenuVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -76,6 +75,32 @@ public class MenuRestfulController {
         JSONObject jsonObject = new JSONObject();
         try {
             if (sysMenuService.deleteMenuById(id) > 0) {
+                jsonObject.put("code", 200);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", 500);
+        }
+        return ApiResponse.ofSuccess(jsonObject);
+    }
+
+    @PostMapping("/updateMenu")
+    public ApiResponse updateMenu(@RequestBody SysMenuNameVO sysMenuNameVO) {
+        JSONObject jsonObject = new JSONObject();
+        SysMenuVO sysMenu = new SysMenuVO(sysMenuNameVO.getId(),
+                sysMenuService.getByMenuName(sysMenuNameVO.getMenuNames()),
+                sysMenuNameVO.getMenuName(),
+                sysMenuNameVO.getMenuCode(),
+                sysMenuNameVO.getMenuHref(),
+                sysMenuNameVO.getMenuIcon(),
+                sysMenuNameVO.getMenuLevel(),
+                sysMenuNameVO.getMenuWeight(),
+                sysMenuNameVO.getIsShow(),
+                null,
+                null
+        );
+        try {
+            if (sysMenuService.updateMenu(sysMenu) > 0) {
                 jsonObject.put("code", 200);
             }
         } catch (Exception e) {
