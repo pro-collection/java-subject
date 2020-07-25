@@ -8,10 +8,7 @@ import com.yanle.mybatis.plus.demo1.common.utils.SecurityUtils;
 import com.yanle.mybatis.plus.demo1.common.utils.UUIDUtils;
 import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
-import com.yanle.mybatis.plus.demo1.system.vo.MenuListVo;
-import com.yanle.mybatis.plus.demo1.system.vo.MenuVo;
-import com.yanle.mybatis.plus.demo1.system.vo.SysMenuNameVO;
-import com.yanle.mybatis.plus.demo1.system.vo.SysMenuVO;
+import com.yanle.mybatis.plus.demo1.system.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -155,6 +152,14 @@ public class MenuRestfulController {
         JSONObject jsonObject = new JSONObject();
         List<String> menuLevel = sysMenuService.getMenuLevel();
         jsonObject.put("menuLevel", menuLevel);
+        return ApiResponse.ofSuccess(jsonObject);
+    }
+
+    @GetMapping("/getPreviousMenu")
+    public ApiResponse getPreviousMenu(@RequestParam("menuLevel") String menuLevel) {
+        JSONObject jsonObject = new JSONObject();
+        List<MenuNameVO> menuNames = sysMenuService.getPreviousMenu(String.valueOf((Integer.parseInt(menuLevel) - 1)));
+        jsonObject.put("menuNames",menuNames);
         return ApiResponse.ofSuccess(jsonObject);
     }
 }
