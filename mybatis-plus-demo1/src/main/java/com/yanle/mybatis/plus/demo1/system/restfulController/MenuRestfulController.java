@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanle.mybatis.plus.demo1.common.base.ApiResponse;
 import com.yanle.mybatis.plus.demo1.common.utils.SecurityUtils;
+import com.yanle.mybatis.plus.demo1.common.utils.UUIDUtils;
 import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.vo.MenuListVo;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.Authenticator;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -106,6 +109,43 @@ public class MenuRestfulController {
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("code", 500);
+        }
+        return ApiResponse.ofSuccess(jsonObject);
+    }
+
+    @PostMapping("/addMenu")
+    public ApiResponse addMenu(@RequestBody SysMenuNameVO sysMenuNameVO) {
+        JSONObject jsonObject = new JSONObject();
+        SysMenu menu = sysMenuService.getByName(
+                sysMenuNameVO.getMenuName(),
+                sysMenuNameVO.getMenuCode(),
+                sysMenuNameVO.getMenuHref()
+        );
+        if (menu == null) {
+            Authentication authentication = SecurityUtils.getCurrentUserAuthentication();
+            SysMenuVO sysMenuVO = new SysMenuVO(
+                    UUIDUtils.getUUID(),
+                    sysMenuService.getByMenuName(sysMenuNameVO.getMenuNames()),
+                    sysMenuNameVO.getMenuName(),
+                    sysMenuNameVO.getMenuCode(),
+                    sysMenuNameVO.getMenuHref(),
+                    sysMenuNameVO.getMenuIcon(),
+                    sysMenuNameVO.getMenuLevel(),
+                    sysMenuNameVO.getMenuWeight(),
+                    sysMenuNameVO.getIsShow(),
+                    new Date(),
+                    (String) authentication.getPrincipal()
+            );
+            try {
+                if (sysMenuService.addMenu(sysMenuVO) > 0) {
+                    jsonObject.put("code", 200);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                jsonObject.put("code", 500);
+            }
+        } else {
+            jsonObject.put("code", 501);
         }
         return ApiResponse.ofSuccess(jsonObject);
     }
