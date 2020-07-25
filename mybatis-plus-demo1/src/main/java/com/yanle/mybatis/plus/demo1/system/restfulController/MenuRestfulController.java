@@ -70,4 +70,18 @@ public class MenuRestfulController {
         jsonObject.put("menuList", listVoList);
         return ApiResponse.ofSuccess(jsonObject);
     }
+
+    @GetMapping("/deleteMenu")
+    public ApiResponse deleteMenu(@RequestParam("id") String id) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            if (sysMenuService.deleteMenuById(id) > 0) {
+                jsonObject.put("code", 200);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("code", 500);
+        }
+        return ApiResponse.ofSuccess(jsonObject);
+    }
 }
