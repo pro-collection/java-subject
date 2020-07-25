@@ -149,4 +149,12 @@ public class MenuRestfulController {
         }
         return ApiResponse.ofSuccess(jsonObject);
     }
+
+    @GetMapping("/getMenuLevel")
+    public ApiResponse getMenuLevel() {
+        JSONObject jsonObject = new JSONObject();
+        List<String> menuLevel = sysMenuService.getMenuLevel();
+        jsonObject.put("menuLevel", menuLevel);
+        return ApiResponse.ofSuccess(jsonObject);
+    }
 }
