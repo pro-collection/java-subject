@@ -64,5 +64,10 @@ public class MenuRestfulController {
                     .build();
             listVoList.add(currentMenuItemVo);
         });
+        jsonObject.put("total", firstMenu.getTotal());
+        jsonObject.put("page", firstMenu.getCurrent());
+        jsonObject.put("page_size", firstMenu.getSize());
+        jsonObject.put("menuList", listVoList);
+        return ApiResponse.ofSuccess(jsonObject);
     }
 }
