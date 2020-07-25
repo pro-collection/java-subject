@@ -15,7 +15,7 @@ public class MenuListVo {
     private String menuHref;
     private String menuIcon;
     private String menuLevel;
-    private String menuWeight;
+    private int menuWeight;
     private Boolean isShow;
     private List<SysMenu> children;
 }
