@@ -27,7 +27,7 @@ public class MenuRestfulController {
     private final SysMenuService sysMenuService;
 
     @GetMapping("/getMenulist")
-    public ApiResponse getMenuList() throws BusinessInterfaceException {
+    public ApiResponse getMenuList() {
         // 获取登录用户信息
         Authentication userAuthentication = SecurityUtils.getCurrentUserAuthentication();
         String name = userAuthentication.getName();
@@ -160,7 +160,7 @@ public class MenuRestfulController {
     public ApiResponse getPreviousMenu(@RequestParam("menuLevel") String menuLevel) {
         JSONObject jsonObject = new JSONObject();
         List<MenuNameVO> menuNames = sysMenuService.getPreviousMenu(String.valueOf((Integer.parseInt(menuLevel) - 1)));
-        jsonObject.put("menuNames",menuNames);
+        jsonObject.put("menuNames", menuNames);
         return ApiResponse.ofSuccess(jsonObject);
     }
 }

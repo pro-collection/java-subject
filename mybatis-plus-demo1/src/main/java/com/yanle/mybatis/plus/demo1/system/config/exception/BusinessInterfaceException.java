@@ -12,6 +12,10 @@ public class BusinessInterfaceException extends RuntimeException {
         this.message = message;
     }
 
+    public BusinessInterfaceException(String message) {
+        this.message = message;
+    }
+
     private String code;
     private String message;
 }
