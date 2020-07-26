@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanle.mybatis.plus.demo1.common.base.ApiResponse;
 import com.yanle.mybatis.plus.demo1.common.utils.SecurityUtils;
 import com.yanle.mybatis.plus.demo1.common.utils.UUIDUtils;
+import com.yanle.mybatis.plus.demo1.system.config.exception.BusinessInterfaceException;
 import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.vo.*;
@@ -26,7 +27,7 @@ public class MenuRestfulController {
     private final SysMenuService sysMenuService;
 
     @GetMapping("/getMenulist")
-    public ApiResponse getMenuList() {
+    public ApiResponse getMenuList() throws BusinessInterfaceException {
         // 获取登录用户信息
         Authentication userAuthentication = SecurityUtils.getCurrentUserAuthentication();
         String name = userAuthentication.getName();
