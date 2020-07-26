@@ -20,21 +20,21 @@ public class InterfaceExceptionHandler {
 
 
     @ResponseBody
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     public ApiResponse handleException(Exception e) {
         log.error(e.getMessage(), e);
         return ApiResponse.fail(e.getMessage());
     }
 
     @ResponseBody
-    @ExceptionHandler(value = NullPointerException.class)
+    @ExceptionHandler(NullPointerException.class)
     public ApiResponse handleNullPointerException(NullPointerException e) {
         log.error(e.getMessage(), e);
         return ApiResponse.fail(e.getMessage());
     }
 
     @ResponseBody
-    @ExceptionHandler(value = BusinessInterfaceException.class)
+    @ExceptionHandler(BusinessInterfaceException.class)
     public ApiResponse handleBusinessInterfacePointerException(BusinessInterfaceException e) {
         log.error(e.getMessage(), e);
         return ApiResponse.fail(e.getMessage());
