@@ -6,6 +6,7 @@
 - redisConfig
 - cache
 - @EnableCaching/@ConditionalOnClass/@EnableConfigurationProperties
+- 事务Transactional的使用
 
 
 
@@ -31,3 +32,4 @@
 - [Java Jsoup详解](https://blog.csdn.net/Wjhsmart/article/details/89360904)
 - [java爬虫-jsoup教程](https://www.jianshu.com/p/1d7167bf9677)
 - [JAVA中STATIC{}语句块详解](https://www.cnblogs.com/caolaoshi/p/7824748.html)
+- [Spring 事务 -- @Transactional的使用](https://www.jianshu.com/p/befc2d73e487)
