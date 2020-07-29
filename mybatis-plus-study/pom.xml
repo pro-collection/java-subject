@@ -11,7 +11,7 @@
     <groupId>com.yanle.mybatis.plus</groupId>
     <artifactId>study</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>study</name>
+    <name>mybatis-plus-study</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -50,6 +50,11 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
