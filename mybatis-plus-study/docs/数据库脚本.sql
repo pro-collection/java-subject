@@ -10,7 +10,7 @@ CREATE TABLE user (
         REFERENCES user (id)
 )  ENGINE=INNODB CHARSET=UTF8;
 
-#初始化数据：
+#初始化数据
 INSERT INTO user (id, name, age, email, manager_id
 	, create_time)
 VALUES (1087982257332887553, '大boss', 40, 'boss@baomidou.com', NULL
