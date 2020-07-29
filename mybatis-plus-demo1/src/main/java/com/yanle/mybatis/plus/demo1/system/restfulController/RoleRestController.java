@@ -10,6 +10,7 @@ import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.service.SysRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,5 +39,17 @@ public class RoleRestController {
     }
 
     @GetMapping("/deleteRole")
-
+    @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
+    public ApiResponse deleteRole(@RequestParam("id") String id) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            sysMenuRoleService.deleteByRoleId("id");
+            sysRoleService.deleteById(id);
+            jsonObject.put("code", 200);
+        } catch (Exception e) {
+            jsonObject.put("code", 500);
+            e.printStackTrace();
+        }
+        return ApiResponse.ofSuccess(jsonObject)
+    }
 }
