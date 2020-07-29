@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/web/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class UserRestController {≠
+public class UserRestController {
     private final SysUserService userService;
 
     private final SysRoleService sysRoleService;
