@@ -4,17 +4,20 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanle.mybatis.plus.demo1.common.base.ApiResponse;
+import com.yanle.mybatis.plus.demo1.common.utils.UUIDUtils;
+import com.yanle.mybatis.plus.demo1.system.entity.SysMenuRole;
 import com.yanle.mybatis.plus.demo1.system.entity.SysRole;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuRoleService;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.service.SysRoleService;
+import com.yanle.mybatis.plus.demo1.system.vo.RoleVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/web/rule")
@@ -50,6 +53,29 @@ public class RoleRestController {
             jsonObject.put("code", 500);
             e.printStackTrace();
         }
-        return ApiResponse.ofSuccess(jsonObject)
+        return ApiResponse.ofSuccess(jsonObject);
+    }
+
+    @PostMapping("/addRole")
+    @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
+    public ApiResponse addRole(@RequestBody RoleVO roleVO) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SysRole role = sysRoleService.getByName(roleVO.getName());
+            if (role == null) {
+                String id = UUIDUtils.getUUID();
+                Arrays.stream(roleVO.getIds()).forEach(menuId -> {
+                    SysMenuRole sysMenuRole = new SysMenuRole(menuId, id);
+                    sysMenuRoleService.addMenuRole(sysMenuRole);
+                });
+                SysRole sysRole = new SysRole(id, roleVO.getName(), roleVO.getAuthority(), new Date());
+                sysRoleService.insert(sysRole);
+                jsonObject.put("code", 200);
+            }
+        } catch (Exception e) {
+            jsonObject.put("code", 500);
+            e.printStackTrace();
+        }
+        return ApiResponse.ofSuccess(jsonObject);
     }
 }
