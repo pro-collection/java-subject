@@ -91,6 +91,18 @@ public class RoleRestController {
         return ApiResponse.ofSuccess(jsonObject);
     }
 
+    @GetMapping("/getRoleMenu")
+    public ApiResponse getRoleMenu(@RequestParam("roleId") String roleId) {
+        JSONObject jsonObject = new JSONObject();
+        List<MenuListVo> listVoList = getMenu();
+        List<String> parentIds = sysMenuService.getRoleMenu(roleId);
+        List<String> roleMenuIds = sysMenuRoleService.getAllMenuId(roleId, parentIds);
+        jsonObject.put("ids", roleMenuIds);
+        jsonObject.put("parentIds", parentIds);
+        jsonObject.put("menuList", listVoList);
+        return ApiResponse.ofSuccess(jsonObject);
+    }
+
     private List<MenuListVo> getMenu() {
         List<MenuListVo> listVoList = new LinkedList<>();
         List<SysMenu> firstMenuList = sysMenuService.getFirstMenu();
