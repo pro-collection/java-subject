@@ -33,3 +33,5 @@
 - [java爬虫-jsoup教程](https://www.jianshu.com/p/1d7167bf9677)
 - [JAVA中STATIC{}语句块详解](https://www.cnblogs.com/caolaoshi/p/7824748.html)
 - [Spring 事务 -- @Transactional的使用](https://www.jianshu.com/p/befc2d73e487)
+- [springboot-OSHI](https://blog.csdn.net/only3c/article/details/90475327)
+- [OSHI查看cpu信息](https://www.jianshu.com/p/5f81f2bb2b91)
