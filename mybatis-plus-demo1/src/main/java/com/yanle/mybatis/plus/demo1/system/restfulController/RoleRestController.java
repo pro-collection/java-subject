@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanle.mybatis.plus.demo1.common.base.ApiResponse;
 import com.yanle.mybatis.plus.demo1.common.utils.UUIDUtils;
+import com.yanle.mybatis.plus.demo1.system.entity.SysMenu;
 import com.yanle.mybatis.plus.demo1.system.entity.SysMenuRole;
 import com.yanle.mybatis.plus.demo1.system.entity.SysRole;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuRoleService;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.service.SysRoleService;
+import com.yanle.mybatis.plus.demo1.system.vo.MenuListVo;
 import com.yanle.mybatis.plus.demo1.system.vo.RoleVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/web/rule")
@@ -77,5 +81,32 @@ public class RoleRestController {
             e.printStackTrace();
         }
         return ApiResponse.ofSuccess(jsonObject);
+    }
+
+    @GetMapping("/getData")
+    public ApiResponse getData() {
+        JSONObject jsonObject = new JSONObject();
+        List<MenuListVo> listVoList = getMenu();
+        jsonObject.put("menuList", listVoList);
+        return ApiResponse.ofSuccess(jsonObject);
+    }
+
+    private List<MenuListVo> getMenu() {
+        List<MenuListVo> listVoList = new LinkedList<>();
+        List<SysMenu> firstMenuList = sysMenuService.getFirstMenu();
+        //组装数据
+        for (SysMenu sysMenu : firstMenuList) {
+            List<SysMenu> secondMenu = sysMenuService.findByParentId(sysMenu.getId());
+            listVoList.add(MenuListVo.builder().id(sysMenu.getId())
+                    .children(secondMenu)
+                    .isShow(sysMenu.getIsShow())
+                    .menuCode(sysMenu.getMenuCode())
+                    .menuHref(sysMenu.getMenuHref())
+                    .menuIcon(sysMenu.getMenuIcon())
+                    .menuLevel(sysMenu.getMenuLevel())
+                    .menuName(sysMenu.getMenuName())
+                    .menuWeight(sysMenu.getMenuWeight()).build());
+        }
+        return listVoList;
     }
 }
