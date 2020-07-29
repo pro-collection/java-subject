@@ -1,5 +1,6 @@
 package com.yanle.mybatis.plus.demo1.system.restfulController;
 
+import com.yanle.mybatis.plus.demo1.system.service.SysMenuRoleService;
 import com.yanle.mybatis.plus.demo1.system.service.SysMenuService;
 import com.yanle.mybatis.plus.demo1.system.service.SysRoleService;
 import lombok.RequiredArgsConstructor;
@@ -13,5 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleRestController {
     private final SysRoleService sysRoleService;
     private final SysMenuService sysMenuService;
-//    private final SysMenuRoleService sysMenuService;
+    private final SysMenuRoleService sysMenuService;
+
+
 }
