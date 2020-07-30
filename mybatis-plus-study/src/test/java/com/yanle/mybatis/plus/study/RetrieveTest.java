@@ -101,5 +101,83 @@ public class RetrieveTest {
         userList.forEach(System.out::println);
     }
 
+    /*
+    创建日期为2019年2月14日并且直属上级为名字为王姓
+    date_format(create_time,'%Y-%m-%d')='2019-02-14' and manager_id
+    in (select id from user where name like '王%')
+    * */
+    @Test
+    public void selectByWrapper4() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+        queryWrapper.apply("date_format(create_time,'%Y-%m-%d')={0}", "2019-02-14")
+                .inSql("manager_id", "select id from user where name like '王%'");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 
+    /*
+    名字为王姓并且（年龄小于40或邮箱不为空）
+    name like '王%' and (age<40 or email is not null)
+    * */
+    @Test
+    public void selectByWrapper5() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.likeRight("name", "王").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
+    /*
+    名字为王姓或者（年龄小于40并且年龄大于20并且邮箱不为空）
+    name like '王%' or (age<40 and age>20 and email is not null)
+    * */
+    @Test
+    public void selectByWrapper6() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.likeRight("name", "王").or(
+                wq -> wq.lt("age", 40).gt("age", 20).isNotNull("email")
+        );
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    (年龄小于40或邮箱不为空）并且名字为王姓
+    (age<40 or email is not null) and name like '王%'
+    * */
+    @Test
+    public void selectByWrapper7() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.nested(qw-> qw.lt("age", 40).or().isNotNull("email"))
+        .likeRight("name", "王");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    年龄为30、31、34、35
+    age in (30、31、34、35)
+    * */
+    @Test
+    public void selectByWrapper8() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("age", Arrays.asList(30, 31, 34, 35));
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    只返回满足条件的其中一条语句即可
+    limit 1
+    * */
+    @Test
+    public void selectByWrapper9() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("age", Arrays.asList(30, 31, 34, 35)).last("limit 1");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
