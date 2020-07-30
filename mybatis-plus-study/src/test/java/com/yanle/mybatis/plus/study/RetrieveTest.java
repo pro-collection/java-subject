@@ -180,4 +180,12 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    @Test
+    public void selectByWrapperSupper() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("age", Arrays.asList(30, 31, 34, 35)).last("limit 1");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
