@@ -10,7 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 查询
@@ -33,5 +35,22 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectBatchIds(ids);
         Assert.assertEquals(3, userList.size());
         userList.forEach(item -> System.out.println(item));
+    }
+
+    @Test
+    public void selectByMap() {
+        Map<String, Object> columnMap = new HashMap<>();
+        columnMap.put("manager_id", 1088248166370832385L);
+        columnMap.put("name", "张雨琪");
+        List<User> userList = userMapper.selectByMap(columnMap);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectByMapMultiple() {
+        Map<String, Object> columnMap = new HashMap<>();
+        columnMap.put("manager_id", 1088248166370832385L);
+        List<User> userList = userMapper.selectByMap(columnMap);
+        userList.forEach(System.out::println);
     }
 }
