@@ -39,9 +39,11 @@ public class RetrieveTest {
 
     @Test
     public void selectByMap() {
+        // string 必须要对应表field名称
         Map<String, Object> columnMap = new HashMap<>();
         columnMap.put("manager_id", 1088248166370832385L);
         columnMap.put("name", "张雨琪");
+        // 效果等价于 where name = '张雨琪' and manager_id = 1088248166370832385L
         List<User> userList = userMapper.selectByMap(columnMap);
         userList.forEach(System.out::println);
     }
