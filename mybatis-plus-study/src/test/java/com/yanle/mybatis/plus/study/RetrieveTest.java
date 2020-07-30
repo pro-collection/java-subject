@@ -1,5 +1,7 @@
 package com.yanle.mybatis.plus.study;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.yanle.mybatis.plus.study.dao.UserMapper;
 import com.yanle.mybatis.plus.study.entity.User;
 import org.junit.Assert;
@@ -55,4 +57,20 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectByMap(columnMap);
         userList.forEach(System.out::println);
     }
+
+    /*
+    名字中包含雨并且年龄小于40
+	name like '%雨%' and age<40
+    * */
+    @Test
+    public void selectByWrapper() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+        queryWrapper.like("name", "雨").lt("age", 40);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+
 }
