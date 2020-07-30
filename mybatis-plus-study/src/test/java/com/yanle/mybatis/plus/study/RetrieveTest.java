@@ -72,5 +72,34 @@ public class RetrieveTest {
         userList.forEach(System.out::println);
     }
 
+    /*
+    名字中包含雨年并且龄大于等于20且小于等于40并且email不为空
+    name like '%雨%' and age between 20 and 40 and email is not null
+    * */
+    @Test
+    public void selectByWrapper2() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+        queryWrapper.like("name", "雨").between("age", 20, 40).isNotNull("email");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    名字为王姓或者年龄大于等于25，按照年龄降序排列，年龄相同按照id升序排列
+    name like '王%' or age>=25 order by age desc,id asc
+    * */
+    @Test
+    public void selectByWrapper3() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+        queryWrapper.likeRight("name", "王").or().ge("age", 25).orderByDesc("age")
+                .orderByAsc("id");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
 
 }
