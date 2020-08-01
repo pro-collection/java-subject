@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.yanle.mybatis.plus.study.dao.UserMapper;
 import com.yanle.mybatis.plus.study.entity.User;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -207,6 +208,20 @@ public class RetrieveTest {
                         User.class,
                         info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id")
                 );
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    带条件
+    * */
+    @Test
+    public void testCondition() {
+        String name = "王";
+        String email = "";
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotEmpty(name), "name", name)
+                .like(StringUtils.isNotEmpty(email), "email", email);
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
