@@ -7,4 +7,8 @@
     <select id="selectAll" resultType="com.yanle.mybatis.plus.study.entity.User">
         select * from user ${ew.customSqlSegment}
     </select>
+
+    <select id="selectUserPage" resultType="com.yanle.mybatis.plus.study.entity.User">
+        select * from user ${ew.customSqlSegment}
+    </select>
 </mapper>
