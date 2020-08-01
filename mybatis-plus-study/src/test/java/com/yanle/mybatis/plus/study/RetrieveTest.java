@@ -348,4 +348,8 @@ public class RetrieveTest {
         List<Object> userList = userMapper.selectObjs(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    /*
+    其他: selectCount、selectOne、
+    * */
 }
