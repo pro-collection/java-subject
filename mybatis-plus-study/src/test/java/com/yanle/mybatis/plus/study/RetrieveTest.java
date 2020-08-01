@@ -151,8 +151,8 @@ public class RetrieveTest {
     @Test
     public void selectByWrapper7() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.nested(qw-> qw.lt("age", 40).or().isNotNull("email"))
-        .likeRight("name", "王");
+        queryWrapper.nested(qw -> qw.lt("age", 40).or().isNotNull("email"))
+                .likeRight("name", "王");
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
@@ -181,10 +181,15 @@ public class RetrieveTest {
         userList.forEach(System.out::println);
     }
 
+    /*
+    select id,name
+       from user
+       where name like '%雨%' and age<40
+    * */
     @Test
     public void selectByWrapperSupper() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.in("age", Arrays.asList(30, 31, 34, 35)).last("limit 1");
+        queryWrapper.select("id", "name").like("name", "雨").lt("age", 40);
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
