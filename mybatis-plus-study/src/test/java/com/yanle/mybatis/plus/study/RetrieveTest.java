@@ -1,5 +1,6 @@
 package com.yanle.mybatis.plus.study;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.yanle.mybatis.plus.study.dao.UserMapper;
@@ -352,4 +353,43 @@ public class RetrieveTest {
     /*
     其他: selectCount、selectOne、
     * */
+
+
+    /*
+    lambda 条件构造器
+    * */
+    @Test
+    public void selectLambda() {
+//        // 方式1
+//        LambdaQueryWrapper<User> lambda = new QueryWrapper<User>().lambda();
+//
+//        // 方式2
+//        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<User>();
+
+        // 方式3
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+
+        // where name like '%雨%' and age < 40;
+        lambdaQuery.like(User::getName, "雨").lt(User::getAge, 40);
+        List<User> userList = userMapper.selectList(lambdaQuery);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectLambda2() {
+//        // 方式1
+//        LambdaQueryWrapper<User> lambda = new QueryWrapper<User>().lambda();
+
+        // 方式2
+        LambdaQueryWrapper<User> lambdaQuery = new LambdaQueryWrapper<User>();
+
+//        // 方式3
+//        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+
+        lambdaQuery.likeRight(User::getName, "王").and(
+                lqw -> lqw.lt(User::getAge, 40).or().isNotNull(User::getEmail)
+        );
+        List<User> userList = userMapper.selectList(lambdaQuery);
+        userList.forEach(System.out::println);
+    }
 }
