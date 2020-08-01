@@ -241,6 +241,14 @@ public class RetrieveTest {
 
     /*
     实体类作为条件构造器构造方法参数
+    作为实体类的场景
+    还可以在实体类上加注解， 例如
+
+    @TableField(condition = SqlCondition.LIKE)
+    private String name;
+
+    @TableField(condition = "%s&lt;#{%s}")
+    private Integer age;
     * */
     @Test
     public void selectByWrapperEntity2() {
