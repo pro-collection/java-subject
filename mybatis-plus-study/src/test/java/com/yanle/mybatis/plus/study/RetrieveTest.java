@@ -260,4 +260,49 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+
+    /*
+    allEq的用法
+    * */
+    @Test
+    public void selectByWrapperAllEq() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "王天风");
+        params.put("age", 25);
+        queryWrapper.allEq(params);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    allEq的用法
+    * */
+    @Test
+    public void selectByWrapperAllEq2() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "王天风");
+        params.put("age", null);
+        // 第二个值， 如果是false, 如果是一个null， 就过滤掉
+        queryWrapper.allEq(params, false);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    条件语句的 allEq 使用方法
+    * */
+    @Test
+    public void selectByWrapperAllEq3() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "王天风");
+        params.put("age", null);
+        // 第二个值， 如果是false, 如果是一个null， 就过滤掉
+        queryWrapper.allEq((key, value) -> !key.equals("name"), params);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
