@@ -50,6 +50,9 @@ public class DeleteTest {
         System.out.println("rows: " + rows);
     }
 
+    /**
+     * lambda 方式删除
+     */
     @Test
     public void deleteByWrapper() {
         LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
