@@ -402,4 +402,21 @@ public class RetrieveTest {
                .list();
        userList.forEach(System.out::println);
     }
+
+    /*
+    直接通过自定义注解sql的方式来添加sql:
+    @Select("select * from user ${ew.customSqlSegment}")
+    List<User> selectAll(@Param(Constants.WRAPPER) Wrapper<User> wrapper);
+    * */
+    @Test
+    public void selectMy() {
+        // 方式2
+        LambdaQueryWrapper<User> lambdaQuery = new LambdaQueryWrapper<User>();
+
+        lambdaQuery.likeRight(User::getName, "王").and(
+                lqw -> lqw.lt(User::getAge, 40).or().isNotNull(User::getEmail)
+        );
+        List<User> userList = userMapper.selectAll(lambdaQuery);
+        userList.forEach(System.out::println);
+    }
 }
