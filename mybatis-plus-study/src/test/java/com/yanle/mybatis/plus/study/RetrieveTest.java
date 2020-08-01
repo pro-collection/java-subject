@@ -3,6 +3,7 @@ package com.yanle.mybatis.plus.study;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.yanle.mybatis.plus.study.dao.UserMapper;
 import com.yanle.mybatis.plus.study.entity.User;
 import org.apache.commons.lang3.StringUtils;
@@ -391,5 +392,14 @@ public class RetrieveTest {
         );
         List<User> userList = userMapper.selectList(lambdaQuery);
         userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectLambda3() {
+       List<User> userList = new LambdaQueryChainWrapper<User>(userMapper)
+               .like(User::getName, "雨")
+               .ge(User::getAge, 20)
+               .list();
+       userList.forEach(System.out::println);
     }
 }
