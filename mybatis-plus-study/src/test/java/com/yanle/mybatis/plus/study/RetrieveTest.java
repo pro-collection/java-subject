@@ -336,4 +336,16 @@ public class RetrieveTest {
         List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    @Test
+    public void selectByWrapperObjs() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+
+        queryWrapper.like("name", "雨").lt("age", 40);
+
+        List<Object> userList = userMapper.selectObjs(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
