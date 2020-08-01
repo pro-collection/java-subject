@@ -193,4 +193,21 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    /*
+    select id,name,age,email
+	           from user
+	           where name like '%雨%' and age<40
+    * */
+    @Test
+    public void selectByWrapperSupper2() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name", "雨").lt("age", 40)
+                .select(
+                        User.class,
+                        info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id")
+                );
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
