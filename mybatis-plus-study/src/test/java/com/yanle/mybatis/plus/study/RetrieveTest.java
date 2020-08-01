@@ -213,7 +213,7 @@ public class RetrieveTest {
     }
 
     /*
-    带条件
+    带条件的查询
     * */
     @Test
     public void testCondition() {
@@ -222,6 +222,19 @@ public class RetrieveTest {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNotEmpty(name), "name", name)
                 .like(StringUtils.isNotEmpty(email), "email", email);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    实体类作为条件构造器构造方法参数
+    * */
+    @Test
+    public void selectByWrapperEntity() {
+        User whereUser = new User();
+        whereUser.setName("刘红雨");
+        whereUser.setAge(32);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>(whereUser);
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
