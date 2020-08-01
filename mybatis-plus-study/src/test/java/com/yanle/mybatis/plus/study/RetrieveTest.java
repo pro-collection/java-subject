@@ -419,4 +419,15 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectAll(lambdaQuery);
         userList.forEach(System.out::println);
     }
+
+    /*
+    定义xml的方式
+
+    首先要定义扫描xml的路径
+    application.yml
+    mybatis-plus:
+        mapper-locations: classpath:mapper/*.xml
+
+    按照正常 mybatis 操作就可以了
+    * */
 }
