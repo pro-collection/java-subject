@@ -2,8 +2,10 @@ package com.yanle.mybatis.plus.study;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanle.mybatis.plus.study.dao.UserMapper;
 import com.yanle.mybatis.plus.study.entity.User;
 import org.apache.commons.lang3.StringUtils;
@@ -396,11 +398,11 @@ public class RetrieveTest {
 
     @Test
     public void selectLambda3() {
-       List<User> userList = new LambdaQueryChainWrapper<User>(userMapper)
-               .like(User::getName, "雨")
-               .ge(User::getAge, 20)
-               .list();
-       userList.forEach(System.out::println);
+        List<User> userList = new LambdaQueryChainWrapper<User>(userMapper)
+                .like(User::getName, "雨")
+                .ge(User::getAge, 20)
+                .list();
+        userList.forEach(System.out::println);
     }
 
     /*
@@ -429,5 +431,37 @@ public class RetrieveTest {
         mapper-locations: classpath:mapper/*.xml
 
     按照正常 mybatis 操作就可以了
+    src/main/resources/mapper/UserMapper.xml
     * */
+
+
+    /*
+    分页
+    * */
+    @Test
+    public void selectPage() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.ge("age", 26);
+        Page<User> page = new Page<User>(1, 2);
+        IPage<User> iPage = userMapper.selectPage(page, queryWrapper);
+        System.out.println("总页数" + iPage.getPages());
+        System.out.println("总记录数" + iPage.getTotal());
+        List<User> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+
+    /*
+分页
+* */
+    @Test
+    public void selectPage2() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.ge("age", 26);
+        Page<Map<String, Object>> page = new Page<>(1, 2);
+        IPage<Map<String, Object>> iPage = userMapper.selectMapsPage(page, queryWrapper);
+        System.out.println("总页数" + iPage.getPages());
+        System.out.println("总记录数" + iPage.getTotal());
+        List<Map<String, Object>> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
 }
