@@ -16,5 +16,24 @@
 privage static String remark;
 ```
 
+### AR模式
+1、首先要在实体对象类上继承 Model 类
+```java
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class User extends Model<User> {
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+    private Long managerId;
+    private LocalDateTime createTime;
+}
+```
+
+
+
+
+
 ### 参考文档
 - [Spring Boot 日志配置(超详细)](https://blog.csdn.net/Inke88/article/details/75007649)
