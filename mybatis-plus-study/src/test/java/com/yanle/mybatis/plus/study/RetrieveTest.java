@@ -238,4 +238,18 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    /*
+    实体类作为条件构造器构造方法参数
+    * */
+    @Test
+    public void selectByWrapperEntity2() {
+        User whereUser = new User();
+        whereUser.setName("刘红雨");
+        whereUser.setAge(32);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>(whereUser);
+        queryWrapper.like("name", "雨").lt("age", 40);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
