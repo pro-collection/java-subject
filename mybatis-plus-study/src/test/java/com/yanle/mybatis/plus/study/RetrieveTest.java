@@ -305,4 +305,35 @@ public class RetrieveTest {
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    @Test
+    public void selectByWrapperMaps() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+        queryWrapper.select("id", "name").like("name", "雨").lt("age", 40);
+        List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    11、按照直属上级分组，查询每组的平均年龄、最大年龄、最小年龄。
+        并且只取年龄总和小于500的组。
+        select avg(age) avg_age,min(age) min_age,max(age) max_age
+        from user
+        group by manager_id
+        having sum(age) <500
+    * */
+    @Test
+    public void selectByWrapperMaps2() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 上面也可以类似于写成这样
+        // QueryWrapper<User> query = Wrappers.<User>query();
+
+        queryWrapper.select("avg(age) avg_age", "min(age) min_age", "max(age) max_age")
+                .groupBy("manager_id").having("sum(age) < {0}", 500);
+
+        List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
