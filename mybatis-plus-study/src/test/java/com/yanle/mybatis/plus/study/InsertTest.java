@@ -22,7 +22,7 @@ public class InsertTest {
     @Test
     public void insert() {
         User user = new User();
-        user.setName("小强");
+        user.setName("小胡");
         user.setAge(31);
         user.setManagerId(1088248166370832385L);
         user.setCreateTime(LocalDateTime.now());
