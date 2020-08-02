@@ -165,7 +165,40 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 第三步： 测试                             
 `src/test/java/com/yanle/mybatis/plus/study/FillTest.java`
 
+#### 自动填充优化
+上面的方式， 每次调用 insert/update 都会调用自动填充处理器， 但是比如有一些 插入和更新 并不会涉及到
+update_time/create_time.                            
+这种情况就是一种不必要的开销。                             
 
+可以这样解决： 使用 `metaObject.hasSetter("FieldName");`            
+```
+@Override
+public void insertFill(MetaObject metaObject) {
+    // 优化
+    boolean hasSetter = metaObject.hasSetter("createTime");
+    if (hasSetter) {
+        System.out.println("insertFill!!!!");
+        // 第一个参数是实体类中的名， 不是数据库中的名
+        // 其实该方法虽然是可以用， 但是官方已经不推荐使用了， 可以用下面的方法
+        // setInsertFieldValByName("createTime", LocalDateTime.now(), metaObject);
+        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+    }
+}
+```
+
+还有一种需求， 比如， 我如果我更新的时候， 我设置了某个属性， 就不需要填充， 如果我没有设置， 就自动填充
+使用 `Object value = getFieldValByName("updateTime", metaObject);` 获取到我们预期的值
+```
+@Override
+public void updateFill(MetaObject metaObject) {
+    Object value = getFieldValByName("updateTime", metaObject);
+    if (value == null) {
+        System.out.println("updateFill!!!!");
+//        setUpdateFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+    }
+}
+```
 
 
 

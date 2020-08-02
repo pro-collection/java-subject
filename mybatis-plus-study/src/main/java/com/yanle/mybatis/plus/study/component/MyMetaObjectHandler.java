@@ -10,17 +10,24 @@ import java.time.LocalDateTime;
 public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-        System.out.println("insertFill!!!!");
-        // 第一个参数是实体类中的名， 不是数据库中的名
-        // 其实该方法虽然是可以用， 但是官方已经不推荐使用了， 可以用下面的方法
-        // setInsertFieldValByName("createTime", LocalDateTime.now(), metaObject);
-        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+        // 优化
+        boolean hasSetter = metaObject.hasSetter("createTime");
+        if (hasSetter) {
+            System.out.println("insertFill!!!!");
+            // 第一个参数是实体类中的名， 不是数据库中的名
+            // 其实该方法虽然是可以用， 但是官方已经不推荐使用了， 可以用下面的方法
+            // setInsertFieldValByName("createTime", LocalDateTime.now(), metaObject);
+            this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+        }
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        System.out.println("updateFill!!!!");
+        Object value = getFieldValByName("updateTime", metaObject);
+        if (value == null) {
+            System.out.println("updateFill!!!!");
 //        setUpdateFieldValByName("updateTime", LocalDateTime.now(), metaObject);
-        this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+            this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+        }
     }
 }

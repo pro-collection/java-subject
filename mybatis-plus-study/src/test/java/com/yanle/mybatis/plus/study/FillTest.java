@@ -26,9 +26,9 @@ public class FillTest {
     @Test
     public void insert() {
         User user = new User();
-        user.setName("刘明昭");
+        user.setName("刘翔");
         user.setAge(21);
-        user.setEmail("lmz@163.com");
+        user.setEmail("lx@163.com");
         user.setManagerId(1088248166370832385L);
         int rows = userMapper.insert(user);
         System.out.println("影响行数： " + rows);
