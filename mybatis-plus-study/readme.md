@@ -305,6 +305,13 @@ spring:
 第四部： 测试
 
 
+### 多租户
+真需要使用的时候， 再研究
+[https://mp.baomidou.com/guide/tenant.html](https://mp.baomidou.com/guide/tenant.html)
+
+
+
+
 
 ### 参考文档
 - [Spring Boot 日志配置(超详细)](https://blog.csdn.net/Inke88/article/details/75007649)
