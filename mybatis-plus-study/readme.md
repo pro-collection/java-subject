@@ -306,10 +306,13 @@ spring:
 
 
 ### 多租户
-真需要使用的时候， 再研究
+真需要使用的时候， 再研究                               
 [https://mp.baomidou.com/guide/tenant.html](https://mp.baomidou.com/guide/tenant.html)
 
 
+### 动态表
+主要是用于解决分表的问题， 用到了再研究                        
+[https://mp.baomidou.com/guide/dynamic-table-name-parser.html](https://mp.baomidou.com/guide/dynamic-table-name-parser.html)
 
 
 
