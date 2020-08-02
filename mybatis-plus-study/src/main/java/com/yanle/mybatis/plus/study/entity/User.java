@@ -3,6 +3,7 @@ package com.yanle.mybatis.plus.study.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,5 +22,7 @@ public class User extends Model<User> {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer version;
+
+    @TableLogic
     private Integer deleted;
 }

@@ -14,4 +14,10 @@ public class MyBatisConfig {
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
+
+    // 新版本不需要这个了， 是自动注入的
+//    @Bean
+//    public ISqlInjector SqlInjector() {
+//        return new LogicsqlInjector();
+//    }
 }
