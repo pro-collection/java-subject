@@ -22,11 +22,12 @@ public class InsertTest {
     @Test
     public void insert() {
         User user = new User();
-        user.setName("小胡");
-        user.setAge(31);
+        user.setName("小明");
+        user.setAge(32);
         user.setManagerId(1088248166370832385L);
         user.setCreateTime(LocalDateTime.now());
         int rows = userMapper.insert(user);
         System.out.println("添加： " + rows);
+        System.out.println("主键： " + user.getId());
     }
 }

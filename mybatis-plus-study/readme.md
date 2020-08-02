@@ -33,6 +33,32 @@ public class User extends Model<User> {
 ```
 
 
+### 主键策略
+
+局部策略优先级高于全局策略
+
+#### 局部策略
+```java
+// 主键自增
+@TableId(type = IdType.AUTO)
+private Long id;
+
+// 默认主键策略
+@TableId(type = IdType.NONE)
+private Long id;
+
+// 主键需要是string类型，生成的主键的可以是UUID；
+@TableId(type = IdType.UUID)
+private Long id;
+
+// 下划线字段的id, 也是字符串类型
+@TableId(type = IdType.ID_WORKER_STR)
+private Long id;
+```
+
+#### 全局策略
+application.yml
+用到了在补充吧
 
 
 
