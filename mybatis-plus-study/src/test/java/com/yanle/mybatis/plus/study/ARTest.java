@@ -49,4 +49,18 @@ public class ARTest {
         // 返回的是一个新对象
         System.out.println(userSelect);
     }
+
+
+    /**
+     * 修改
+     */
+    @Test
+    public void updateById() {
+        User user = new User();
+        user.setId(1289793409472389122L);
+        user.setName("张草草");
+        boolean updateSelect = user.updateById();
+        // 返回的是一个新对象
+        System.out.println("updateSelect: " + updateSelect);
+    }
 }
