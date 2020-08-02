@@ -75,4 +75,20 @@ public class ARTest {
         // 返回的是一个新对象
         System.out.println("deleteSelect: " + deleteSelect);
     }
+
+    /**
+     * insertOrUpdate
+     */
+    @Test
+    public void insertOrUpdate() {
+        User user = new User();
+        user.setId(1289796684967907329L);
+        user.setName("张三娃");
+        user.setAge(24);
+        user.setEmail("zc234234234@123kjsdk.com");
+        user.setManagerId(1088248166370832385L);
+        user.setCreateTime(LocalDateTime.now());
+        boolean insertOrUpdate = user.insertOrUpdate();
+        System.out.println("insertOrUpdate: " + insertOrUpdate);
+    }
 }
