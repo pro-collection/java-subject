@@ -1,5 +1,6 @@
 package com.yanle.mybatis.plus.study.config;
 
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -20,4 +21,10 @@ public class MyBatisConfig {
 //    public ISqlInjector SqlInjector() {
 //        return new LogicsqlInjector();
 //    }
+
+    // 配置乐观锁插件
+    @Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
+    }
 }

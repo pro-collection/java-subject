@@ -22,6 +22,8 @@ public class User extends Model<User> {
 
     @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
+
+    @Version
     private Integer version;
 
     @TableLogic

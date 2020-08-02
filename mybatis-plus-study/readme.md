@@ -200,6 +200,79 @@ public void updateFill(MetaObject metaObject) {
 }
 ```
 
+### 乐观锁
+为了方式更新冲突竟态
+
+#### 实现步骤
+第一步: 配置乐观锁插件
+```java
+@Configuration
+@MapperScan("com.yanle.mybatis.plus.study.dao")
+public class MyBatisConfig {
+
+    // 注册一个分页插件
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
+
+    // 配置乐观锁插件
+    @Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
+    }
+}
+```
+
+第二步： 在 entity 类上面加上 `@Version` 注解
+```java
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class User extends Model<User> {
+    private static final long serialVersionUID = 3660096825159993280L;
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+    private Long managerId;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.UPDATE)
+    private LocalDateTime updateTime;
+    
+    @Version
+    private Integer version;
+
+    @TableLogic
+    @TableField(select = false) // 这个时候， 在 sql 查询就不会显示这个字段了
+    private Integer deleted;
+}
+``` 
+
+第三步： 测试
+```
+/**
+ * 更新， 会自动更新 update_time
+ */
+@Test
+public void updateById() {
+    int version = 1;
+    User user = new User();
+    user.setEmail("balabala@163.com");
+    user.setId(1289913559076925442L);
+    user.setVersion(version);
+    int rows = userMapper.updateById(user);
+    System.out.println("rows: " + rows);
+}
+```
+
+#### 注意事项
+不要尝试复用 `QueryWrapper` 因为可能会出现一些不可预期的情况
+`在 update(entity, wrapper) 方法下, wrapper 不能复用!!!`
+
+
 
 
 
