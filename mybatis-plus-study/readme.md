@@ -273,6 +273,34 @@ public void updateById() {
 `在 update(entity, wrapper) 方法下, wrapper 不能复用!!!`
 
 
+### 性能分析插件
+PerformanceInterceptor在3.2.0被移除了，如果想进行性能分析，用第三方的，官方这样写的“该插件 3.2.0 以上版本移除推荐使用第三方扩展 执行 SQL 分析打印 功能”.                      
+自己想办法研究吧
+
+#### 实行 sql 分析打印
+第一步：装包
+```xml
+<!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
+<dependency>
+    <groupId>p6spy</groupId>
+    <artifactId>p6spy</artifactId>
+    <version>3.8.7</version>
+</dependency>
+```
+
+第二步： 配置驱动类 application.yml
+```yml
+spring:
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:h2:mem:test
+    ...
+```
+
+第三步： 添加配置文件                     
+`src/main/resources/spy.properties`
+
+第四部： 测试
 
 
 
