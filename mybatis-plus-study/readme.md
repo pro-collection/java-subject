@@ -323,7 +323,7 @@ public class DeleteAllMethod extends AbstractMethod {
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         // 执行的 sql
-        String sql = "delete from " + tableInfo.getTableName();
+        String sql = "TRUNCATE TABLE " + tableInfo.getTableName();
         // mapper 接口方法名
         String methodName = "deleteAll";
 
@@ -348,7 +348,37 @@ public class MySqlInjector extends DefaultSqlInjector {
 }
 ```
 
-第四步： 定义使用
+第三步：添加到 BaseMapper                              
+`src/main/java/com/yanle/mybatis/plus/study/dao/UserMapper.java`                            
+```java
+public interface UserMapper extends BaseMapper<User> {
+
+    List<User> selectAll(@Param(Constants.WRAPPER) Wrapper<User> wrapper);
+
+    IPage<User> selectUserPage(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
+
+    /**
+     * 如果是自定义的查询， 会丢失 逻辑删除的功能
+     *
+     * 解决办法有两个
+     * 1、在 userMapper 调用的时候， 自己在查询的条件写上限定
+     * 2、自己在自定义sql语句的时候， 加上限定
+     * @param wrapper wrapper
+     * @return 用户List
+     */
+    @Select("select * from user ${ew.customSqlSegment}")
+    List<User> mySelectList(@Param(Constants.WRAPPER) Wrapper<User> wrapper);
+
+    /**
+     * 删除所有
+     * @return 影响行数
+     */
+    Integer deleteAll();
+}
+```
+
+第四步：测试                      
+`src/test/java/com/yanle/mybatis/plus/study/InjectorTest.java`                          
 
 
 
