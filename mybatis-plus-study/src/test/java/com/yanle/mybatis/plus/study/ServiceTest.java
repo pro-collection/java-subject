@@ -66,4 +66,22 @@ public class ServiceTest {
         boolean saveBatch = userService.saveOrUpdateBatch(userList);
         System.out.println("saveBatch ： " + saveBatch);
     }
+
+    /**
+     * 链式调用
+     */
+    @Test
+    public void chain() {
+        List<User> userList = userService.lambdaQuery().gt(User::getAge, 25).like(User::getName, "雨").list();
+        userList.forEach(System.out::println);
+    }
+
+    /**
+     * 链式调用
+     */
+    @Test
+    public void chain2() {
+        boolean update = userService.lambdaUpdate().eq(User::getAge, 25).set(User::getAge, 26).update();
+        System.out.println("update: " + update);
+    }
 }
