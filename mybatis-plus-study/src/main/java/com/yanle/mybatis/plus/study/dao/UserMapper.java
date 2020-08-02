@@ -28,4 +28,10 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Select("select * from user ${ew.customSqlSegment}")
     List<User> mySelectList(@Param(Constants.WRAPPER) Wrapper<User> wrapper);
+
+    /**
+     * 删除所有
+     * @return 影响行数
+     */
+    Integer deleteAll();
 }

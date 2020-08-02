@@ -314,6 +314,42 @@ spring:
 主要是用于解决分表的问题， 用到了再研究                        
 [https://mp.baomidou.com/guide/dynamic-table-name-parser.html](https://mp.baomidou.com/guide/dynamic-table-name-parser.html)
 
+### sql 注入器
+#### 实现步骤
+第一步： 创建 方法 实现                       
+`src/main/java/com/yanle/mybatis/plus/study/method/DeleteAllMethod.java`:                       
+```java
+public class DeleteAllMethod extends AbstractMethod {
+    @Override
+    public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
+        // 执行的 sql
+        String sql = "delete from " + tableInfo.getTableName();
+        // mapper 接口方法名
+        String methodName = "deleteAll";
+
+        SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
+
+        return addDeleteMappedStatement(mapperClass, methodName, sqlSource);
+    }
+}
+```
+
+第二步： 创建 注入器                 
+`src/main/java/com/yanle/mybatis/plus/study/injector/MySqlInjector.java`
+```java
+@Component
+public class MySqlInjector extends DefaultSqlInjector {
+    @Override
+    public List<AbstractMethod> getMethodList(Class<?> mapperClass) {
+        List<AbstractMethod> methodList = super.getMethodList(mapperClass);
+        methodList.add(new DeleteAllMethod());
+        return methodList;
+    }
+}
+```
+
+第四步： 定义使用
+
 
 
 ### 参考文档
