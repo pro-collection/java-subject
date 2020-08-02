@@ -22,6 +22,7 @@ privage static String remark;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class User extends Model<User> {
+    private static final long serialVersionUID = 3660096825159993280L;
     private Long id;
     private String name;
     private Integer age;
