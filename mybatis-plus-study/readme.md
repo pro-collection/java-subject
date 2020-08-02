@@ -386,5 +386,11 @@ public interface UserMapper extends BaseMapper<User> {
 在 MyMapper 中实现公共复用的 sql 注入器。 
 
 
+### 选装件
+实际上都是 自定义 sql 方法， 只不过是官方提供的而已                               
+[整点活，MyBatis-Plus学习笔记（SQL注入器——选装件）](https://blog.csdn.net/weixin_45861935/article/details/106528349)
+
+
 ### 参考文档
 - [Spring Boot 日志配置(超详细)](https://blog.csdn.net/Inke88/article/details/75007649)
+- [整点活，MyBatis-Plus学习笔记（SQL注入器——选装件）](https://blog.csdn.net/weixin_45861935/article/details/106528349)
