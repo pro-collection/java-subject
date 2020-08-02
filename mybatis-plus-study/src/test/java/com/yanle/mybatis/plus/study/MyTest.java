@@ -1,5 +1,6 @@
 package com.yanle.mybatis.plus.study;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.yanle.mybatis.plus.study.dao.UserMapper;
 import com.yanle.mybatis.plus.study.entity.User;
 import org.junit.Test;
@@ -45,5 +46,12 @@ public class MyTest {
         user.setId(1088248166370832385L);
         int rows = userMapper.updateById(user);
         System.out.println("rows: " + rows);
+    }
+
+    @Test
+    public void mySelect() {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<User>();
+        List<User> userList = userMapper.mySelectList(lambdaQueryWrapper.gt(User::getAge, 25));
+        userList.forEach(System.out::println);
     }
 }

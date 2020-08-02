@@ -24,5 +24,6 @@ public class User extends Model<User> {
     private Integer version;
 
     @TableLogic
+    @TableField(select = false) // 这个时候， 在 sql 查询就不会显示这个字段了
     private Integer deleted;
 }
