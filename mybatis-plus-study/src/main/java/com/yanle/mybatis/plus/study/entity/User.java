@@ -19,4 +19,7 @@ public class User extends Model<User> {
     private String email;
     private Long managerId;
     private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private Integer version;
+    private Integer deleted;
 }
