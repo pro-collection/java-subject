@@ -73,6 +73,50 @@ mybatis-plus:
 直接看官网吧， 没有啥好说的
 
 
+### 逻辑删除
+第一步， 配置 application.yml
+```yml
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+#  global-config:
+#    db-config:
+#      id-type: uuid
+  global-config:
+    db-config:
+      logic-not-delete-value: 0  # 逻辑未删除 默认也是这样的
+      logic-delete-value: 1 # 逻辑删除的是1 默认也是这样的
+```
+
+第二步： 在 entity 中添加备注
+```java
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class User extends Model<User> {
+    private static final long serialVersionUID = 3660096825159993280L;
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+    private Long managerId;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private Integer version;
+
+    @TableLogic
+    @TableField(select = false) // 这个时候， 在 sql 查询就不会显示这个字段了
+    private Integer deleted;
+}
+```
+
+第三步使用：                              
+`src/test/java/com/yanle/mybatis/plus/study/MyTest.java`
+
+
+### 自动填充
+比如自动填充时间等、比如每次新增或者修改的时候， 需要记录修改人是谁
+
+
+
 
 
 
