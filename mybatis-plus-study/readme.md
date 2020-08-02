@@ -58,8 +58,19 @@ private Long id;
 
 #### 全局策略
 application.yml
+```yml
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: uuid
+```
+
 用到了在补充吧
 
+
+### 基本配置
+直接看官网吧， 没有啥好说的
 
 
 ### 参考文档
