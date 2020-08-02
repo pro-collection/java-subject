@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public class FillTest {
     @Test
     public void updateById() {
         User user = new User();
-        user.setAge(27);
+        user.setAge(29);
         user.setId(1088248166370832385L);
         int rows = userMapper.updateById(user);
         System.out.println("rows: " + rows);
