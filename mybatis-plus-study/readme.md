@@ -115,6 +115,56 @@ public class User extends Model<User> {
 ### 自动填充
 比如自动填充时间等、比如每次新增或者修改的时候， 需要记录修改人是谁
 
+第一步: 添加注解
+```java
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class User extends Model<User> {
+    private static final long serialVersionUID = 3660096825159993280L;
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+    private Long managerId;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.UPDATE)
+    private LocalDateTime updateTime;
+    private Integer version;
+
+    @TableLogic
+    @TableField(select = false) // 这个时候， 在 sql 查询就不会显示这个字段了
+    private Integer deleted;
+}
+```
+
+第二步： 填充处理器
+```java
+@Component
+public class MyMetaObjectHandler implements MetaObjectHandler {
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        System.out.println("insertFill!!!!");
+        // 第一个参数是实体类中的名， 不是数据库中的名
+        // 其实该方法虽然是可以用， 但是官方已经不推荐使用了， 可以用下面的方法
+        // setInsertFieldValByName("createTime", LocalDateTime.now(), metaObject);
+        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
+    }
+
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        System.out.println("updateFill!!!!");
+//        setUpdateFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+    }
+}
+```
+
+第三步： 测试                             
+`src/test/java/com/yanle/mybatis/plus/study/FillTest.java`
+
 
 
 
