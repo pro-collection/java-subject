@@ -84,4 +84,13 @@ public class ServiceTest {
         boolean update = userService.lambdaUpdate().eq(User::getAge, 25).set(User::getAge, 26).update();
         System.out.println("update: " + update);
     }
+
+    /**
+     * 链式调用3 - remove
+     */
+    @Test
+    public void chain3() {
+        boolean update = userService.lambdaUpdate().eq(User::getAge, 25).set(User::getAge, 26).remove();
+        System.out.println("update: " + update);
+    }
 }
