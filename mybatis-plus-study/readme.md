@@ -381,6 +381,10 @@ public interface UserMapper extends BaseMapper<User> {
 `src/test/java/com/yanle/mybatis/plus/study/InjectorTest.java`                          
 
 
+#### sql 注入器复用的方式
+可以考虑在做一个 MyMapper 接口， 继承 BaseMapper, 然后其他的业务 mapper 直接继承 MyMapper。                      
+在 MyMapper 中实现公共复用的 sql 注入器。 
+
 
 ### 参考文档
 - [Spring Boot 日志配置(超详细)](https://blog.csdn.net/Inke88/article/details/75007649)
