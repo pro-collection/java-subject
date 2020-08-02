@@ -63,4 +63,16 @@ public class ARTest {
         // 返回的是一个新对象
         System.out.println("updateSelect: " + updateSelect);
     }
+
+    /**
+     * 删除
+     */
+    @Test
+    public void deleteById() {
+        User user = new User();
+        user.setId(1289793409472389122L);
+        boolean deleteSelect = user.deleteById();
+        // 返回的是一个新对象
+        System.out.println("deleteSelect: " + deleteSelect);
+    }
 }
