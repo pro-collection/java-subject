@@ -47,4 +47,23 @@ public class ServiceTest {
         boolean saveBatch = userService.saveBatch(userList);
         System.out.println("saveBatch ： " + saveBatch);
     }
+
+    /**
+     * 批量修改插入
+     */
+    @Test
+    public void BatchSaveOrUpdate() {
+        User user1 = new User();
+        user1.setName("张毅");
+        user1.setAge(28);
+
+        User user2 = new User();
+        user2.setId(1289805833621561346L);
+        user2.setName("张毅张毅张毅张毅2");
+        user2.setAge(28);
+
+        List<User> userList = Arrays.asList(user1, user2);
+        boolean saveBatch = userService.saveOrUpdateBatch(userList);
+        System.out.println("saveBatch ： " + saveBatch);
+    }
 }
